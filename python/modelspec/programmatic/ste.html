@@ -87,6 +87,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../install/install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../cmake_doc/index.html">CMake Build Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install/developer.html">Developer Builds</a></li>
 </ul>
 <p class="caption"><span class="caption-text">User documentation:</span></p>
 <ul>
@@ -154,7 +155,9 @@
     
 <li class="wy-breadcrumbs-aside">
     
-        <a href="/nrn/hoc/modelspec/programmatic/ste.html" > Switch to HOC</a>
+    
+        
+        <a href="../../../..html/../hoc/modelspec/programmatic/ste.html" >  Switch to HOC</a>
     
 </li>
 
@@ -184,12 +187,12 @@
 <dt>Syntax:</dt><dd><code class="docutils literal notranslate"><span class="pre">ste</span> <span class="pre">=</span> <span class="pre">h.StateTransitionEvent(nstate,</span> <span class="pre">[pointprocess])</span></code></dd>
 <dt>Description:</dt><dd><p>A StateTransitionEvent describes a finite state machine which is computed during a simulation run and moves
 instantaneously from one state to another as trigger threshold conditions become true according to
-transitions defined by the set of m then specifications. Generally, it is the
-case that when a transition occurs, a callback is executed</p>
+transitions defined by the set of <code class="docutils literal notranslate"><span class="pre">ste.transition</span></code> specifications. Generally, it is the
+case that when a transition occurs, a callback is executed.</p>
 <p><cite>nstate</cite> is the number of states available to the machine and must be &gt; 0 (1 is valid). If a state index, <code class="docutils literal notranslate"><span class="pre">istate</span></code>,
 is not the destination of a <a class="reference internal" href="#StateTransitionEvent.transition" title="StateTransitionEvent.transition"><code class="xref py py-meth docutils literal notranslate"><span class="pre">StateTransitionEvent.transition()</span></code></a>, then the only way to reach
 it is via an interpreter call to <a class="reference internal" href="#StateTransitionEvent.state" title="StateTransitionEvent.state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">StateTransitionEvent.state()</span></code></a> with arg <code class="docutils literal notranslate"><span class="pre">istate</span></code>.  If <code class="docutils literal notranslate"><span class="pre">istate</span></code> is not
-the source for a transition, then the only exit from it is when a transition enters it an the consequent callback
+the source for a transition, then the only exit from it is when a transition enters it and the consequent callback
 executes a <a class="reference internal" href="#StateTransitionEvent.state" title="StateTransitionEvent.state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">StateTransitionEvent.state()</span></code></a> with arg different from <code class="docutils literal notranslate"><span class="pre">istate</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">pointprocess</span></code> arg is needed only if the simulation uses multiple threads or the local variable time
 step method. (an admittedly grotesque requirement to give a hint as to which thread and cell is appropriate for
@@ -298,10 +301,12 @@ when a new simulation run begins.</p>
 <dt>Description:</dt><dd><p>Adds a transition from the <code class="docutils literal notranslate"><span class="pre">isrcstate</span></code> of the StateTransitionEvent instance to the <code class="docutils literal notranslate"><span class="pre">ideststate</span></code>.
 <code class="docutils literal notranslate"><span class="pre">Isrcstate</span></code> and <code class="docutils literal notranslate"><span class="pre">ideststate</span></code> must be &gt;= 0 and &lt; <code class="docutils literal notranslate"><span class="pre">nstate</span></code> (number of states specified in the constructor).
 <code class="docutils literal notranslate"><span class="pre">Isrcstate</span></code> == <code class="docutils literal notranslate"><span class="pre">ideststate</span></code> is allowed.</p>
-<p>A transition occurs when <code class="docutils literal notranslate"><span class="pre">triggervar</span></code> becomes greater than <code class="docutils literal notranslate"><span class="pre">triggerthresh</span></code>. Note: a transition does NOT
+<p>A transition occurs when <code class="docutils literal notranslate"><span class="pre">triggervar</span></code> becomes greater than <code class="docutils literal notranslate"><span class="pre">triggerthresh</span></code>. Note: with the fixed step methog a transition does NOT
 occur when it merely becomes equal. Note: a transition does not occur if the isrcstate is entered and triggervar
-is greater than triggerthresh. ie. triggervar must first become not greater than triggervar and then become greater
-for the transition to occur.</p>
+is greater than triggerthresh - <a class="reference internal" href="../../programming/math/misc.html#float_epsilon" title="float_epsilon"><code class="xref py py-data docutils literal notranslate"><span class="pre">float_epsilon</span></code></a>. ie. triggervar must first become not greater than triggervar and then become greater
+for the transition to occur. (The value of float_epsilon is used internally to prevent undesirable multiple events due to round-off error when
+cvode.condition_order is activated and transition destination is the same as source. (Another way of preventing premature firing of state transitions
+is to instead move to a different state and move back via a transition with a slightly higher threshold)</p>
 <p>On each time step, the transitions from a source state are checked in the order in which they are created
 and the first true condition
 specifies the transition to be taken. But note a subtlety with regard to the variable step methods
@@ -316,13 +321,16 @@ will work correctly
 only for single thread fixed and global variable step methods and otherwise allow a race condition. Note that
 with multiple threads or the local variable time step method. All <code class="docutils literal notranslate"><span class="pre">triggervar</span></code> for a given <code class="docutils literal notranslate"><span class="pre">ste</span></code> need to be
 in the same thread or cell as was specified by the StateTransitionEvent constructor.</p>
+<p>The direction sense of threshold crossing can be reversed by reversing the order of the <code class="docutils literal notranslate"><span class="pre">_ref_triggervar</span></code> and <code class="docutils literal notranslate"><span class="pre">_ref_triggerthresh</span></code> args.</p>
 <p>In Python, the syntax for a triggervar reference is, for example, h._ref_t or sec(.5)._ref_v . A reference to a
 hoc variable is also allowed for a triggerthreash, but if the triggerthresh is a constant, one can declare a Python
 reference with triggerthresh = h.ref(value) and pass that for the <code class="docutils literal notranslate"><span class="pre">triggerthresh</span></code> arg.
 One changes its value via the
-triggerthreash[0] = … syntax. Since the ste object keeps pointers to these values, it is very important that
+<code class="docutils literal notranslate"><span class="pre">triggerthresh[0]</span> <span class="pre">=</span> <span class="pre">...</span></code> syntax. Since the ste object keeps pointers to these values, it is very important that
 triggerthresh not be destroyed unless the ste instance is also destroyed.</p>
-<p><code class="docutils literal notranslate"><span class="pre">statement</span></code> or <code class="docutils literal notranslate"><span class="pre">pycallable</span></code> are optional arguments. They are executed when the transition takes place.</p>
+<p><code class="docutils literal notranslate"><span class="pre">statement</span></code> or <code class="docutils literal notranslate"><span class="pre">pycallable</span></code> are optional arguments. They are executed when the transition takes place. Note that number of
+distinct def for pycallable for each transition can be reduced by using the syntax for callback with args, <code class="docutils literal notranslate"><span class="pre">(pycallable,</span> <span class="pre">(arg1,</span> <span class="pre">arg2,...))</span></code>
+and if a callback arg is a list or dict, it can be changed by the pycallable.</p>
 </dd>
 <dt>Bugs:</dt><dd><p>A time <code class="docutils literal notranslate"><span class="pre">triggervar</span></code> is handled the same way as any other range variable such as membrane potential. That is,
 it is compared every time step to its corresponding <code class="docutils literal notranslate"><span class="pre">triggerthresh</span></code>.

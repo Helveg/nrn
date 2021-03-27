@@ -90,6 +90,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../install/install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../cmake_doc/index.html">CMake Build Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install/developer.html">Developer Builds</a></li>
 </ul>
 <p class="caption"><span class="caption-text">User documentation:</span></p>
 <ul class="current">
@@ -193,7 +194,9 @@
     
 <li class="wy-breadcrumbs-aside">
     
-        <a href="/nrn/hoc/programming/math/vector.html" > Switch to HOC</a>
+    
+        
+        <a href="../../../..html/../hoc/programming/math/vector.html" >  Switch to HOC</a>
     
 </li>
 
@@ -689,6 +692,28 @@ a good idea to supply it if possible.</p>
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="#Vector.record" title="Vector.record"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Vector.record()</span></code></a>, <a class="reference internal" href="#Vector.play_remove" title="Vector.play_remove"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Vector.play_remove()</span></code></a></p>
 </div>
+<p>Example of playing into an Iclamp for varying current:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">neuron</span> <span class="kn">import</span> <span class="n">h</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="k">as</span> <span class="nn">plt</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">h</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;stdrun.hoc&#39;</span><span class="p">)</span>
+<span class="n">sec</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;sec&#39;</span><span class="p">)</span>
+<span class="n">sec</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">pas</span><span class="p">)</span>
+<span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">inp</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">250</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">pvec</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Vector</span><span class="p">()</span><span class="o">.</span><span class="n">from_python</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+<span class="n">stim</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">IClamp</span><span class="p">(</span><span class="n">sec</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">stim</span><span class="o">.</span><span class="n">dur</span> <span class="o">=</span> <span class="mf">1e9</span>
+<span class="n">pvec</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">stim</span><span class="p">,</span> <span class="n">stim</span><span class="o">.</span><span class="n">_ref_amp</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">rd</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">h</span><span class="o">.</span><span class="n">Vector</span><span class="p">()</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;stim_i&#39;</span><span class="p">,</span> <span class="s1">&#39;amp&#39;</span><span class="p">],</span>
+                                            <span class="p">[</span><span class="n">h</span><span class="o">.</span><span class="n">_ref_t</span><span class="p">,</span> <span class="n">sec</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">_ref_v</span><span class="p">,</span> <span class="n">stim</span><span class="o">.</span><span class="n">_ref_i</span><span class="p">,</span> <span class="n">stim</span><span class="o">.</span><span class="n">_ref_amp</span><span class="p">])}</span>
+<span class="n">h</span><span class="o">.</span><span class="n">v_init</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">tstop</span><span class="o">=</span> <span class="o">-</span><span class="mi">70</span><span class="p">,</span> <span class="mi">500</span>
+<span class="n">h</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rd</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">],</span> <span class="n">rd</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>Example of playing into a segment’s ina:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">neuron</span> <span class="kn">import</span> <span class="n">h</span><span class="p">,</span> <span class="n">gui</span>

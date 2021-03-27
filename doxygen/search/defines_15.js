@@ -48,5 +48,6 @@ var searchData=
   ['userfloat',['USERFLOAT',['../hocdec_8h.html#a510abd0cb2215c23d009f332c1d3c1eb',1,'hocdec.h']]],
   ['userint',['USERINT',['../hocdec_8h.html#abe0e0bc17380dd3192e058352baa04d7',1,'hocdec.h']]],
   ['userproperty',['USERPROPERTY',['../hocdec_8h.html#a12691df0fc5cda63988a996008ce248e',1,'hocdec.h']]],
+  ['usetable',['usetable',['../hh_8c.html#a6032693a91fb829a5aeb13dc01a579d4',1,'hh.c']]],
   ['ushrt_5fmax',['USHRT_MAX',['../limits_8h.html#a689b119da994dece91d44b5aeac643ed',1,'limits.h']]]
 ];

@@ -89,6 +89,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install/install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cmake_doc/index.html">CMake Build Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install/developer.html">Developer Builds</a></li>
 </ul>
 <p class="caption"><span class="caption-text">User documentation:</span></p>
 <ul>
@@ -122,6 +123,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#classes">Classes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#declaring-classes">Declaring classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#object-types">Object types</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#miscellaneous-tips">Miscellaneous tips</a><ul>
@@ -189,6 +191,7 @@
     
 <li class="wy-breadcrumbs-aside">
     
+    
 </li>
 
       <li class="wy-breadcrumbs-aside">
@@ -225,7 +228,8 @@ available. This is done for a number of functions in the <code class="docutils l
 </pre></div>
 </div>
 </div></blockquote>
-<p>The variable <code class="docutils literal notranslate"><span class="pre">nrnpy_pyobj_sym_</span></code> here is a <code class="docutils literal notranslate"><span class="pre">Symbol*</span></code> and it is shared and available at least within <code class="docutils literal notranslate"><span class="pre">nrnpython</span></code>.</p>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">nrnpy_pyobj_sym_</span></code> here is a <code class="docutils literal notranslate"><span class="pre">Symbol*</span></code> and it is shared and available at least within <code class="docutils literal notranslate"><span class="pre">nrnpython</span></code>.
+(See object types below for more about detecting the type of an <code class="docutils literal notranslate"><span class="pre">Object*</span></code>.)</p>
 </div>
 <div class="section" id="to-check-if-a-pyobject-is-wrapping-a-neuron-object">
 <h3>To check if a PyObject is wrapping a NEURON object<a class="headerlink" href="#to-check-if-a-pyobject-is-wrapping-a-neuron-object" title="Permalink to this headline">¶</a></h3>
@@ -321,6 +325,33 @@ integer, or bool. In HOC, these all return doubles.
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">retobj_methods</span></code> is a null-terminated array of <code class="docutils literal notranslate"><span class="pre">Member_ret_obj_func</span></code> of methods that return objects.
 (The actual functions implementing them take a <code class="docutils literal notranslate"><span class="pre">void*</span></code> and return an <code class="docutils literal notranslate"><span class="pre">Object**</span></code>.)</p>
+</div>
+<div class="section" id="object-types">
+<h3>Object types<a class="headerlink" href="#object-types" title="Permalink to this headline">¶</a></h3>
+<p>The type of every NEURON <code class="docutils literal notranslate"><span class="pre">Object*</span> <span class="pre">obj</span></code> is determined by it’s <code class="docutils literal notranslate"><span class="pre">ctemplate-&gt;sym</span></code>. This is a <code class="docutils literal notranslate"><span class="pre">Symbol*</span></code>.
+The pointers can be directly compared to see if two objects are of the same type. In particular,
+a <code class="docutils literal notranslate"><span class="pre">Symbol</span></code> has a <code class="docutils literal notranslate"><span class="pre">char*</span></code> field <code class="docutils literal notranslate"><span class="pre">name</span></code>. That is, to print the name of the type
+that <code class="docutils literal notranslate"><span class="pre">obj</span></code> is an instance of, one can use:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;The type of obj is: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="o">-&gt;</span><span class="n">ctemplate</span><span class="o">-&gt;</span><span class="n">sym</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">hoc_lookup</span></code> function takes a NEURON class name and returns the associated <code class="docutils literal notranslate"><span class="pre">Symbol*</span></code>.
+For example:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Symbol</span><span class="o">*</span> <span class="n">vector_sym</span> <span class="o">=</span> <span class="n">hoc_lookup</span><span class="p">(</span><span class="s">&quot;Vector&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>NEURON provides internal convenience functions <code class="docutils literal notranslate"><span class="pre">is_obj_type(Object*</span> <span class="pre">obj,</span> <span class="pre">const</span> <span class="pre">char*</span> <span class="pre">type_name)</span></code>
+and <code class="docutils literal notranslate"><span class="pre">check_obj_type(Object*</span> <span class="pre">obj,</span> <span class="pre">const</span> <span class="pre">char*</span> <span class="pre">type_name)</span></code> that check to see if <code class="docutils literal notranslate"><span class="pre">obj</span></code> is of the
+type specified by <code class="docutils literal notranslate"><span class="pre">type_name</span></code>. The former returns a 1 (true) or 0 (false); the latter has no
+return and raises an error if the type is wrong. These work by doing a <code class="docutils literal notranslate"><span class="pre">strcmp</span></code>. If the
+<code class="docutils literal notranslate"><span class="pre">Symbol*</span></code> is known, it is more efficient to directly compare the <code class="docutils literal notranslate"><span class="pre">Symbol*</span></code>.</p>
+<p>For example, to see if <code class="docutils literal notranslate"><span class="pre">obj</span></code> is an instance of <code class="docutils literal notranslate"><span class="pre">Vector</span></code> and the <code class="docutils literal notranslate"><span class="pre">Symbol*</span></code> is not already
+known, use <code class="docutils literal notranslate"><span class="pre">is_obj_type(obj,</span> <span class="pre">&quot;Vector&quot;)</span></code>.</p>
+<p>These convenience functions are defined in <code class="docutils literal notranslate"><span class="pre">src/oc/hoc_oop.cpp</span></code>.</p>
 </div>
 </div>
 <div class="section" id="miscellaneous-tips">

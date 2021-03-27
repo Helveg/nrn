@@ -51,7 +51,7 @@ var searchData=
   ['plus',['PLUS',['../ivos_2regexp_8cpp.html#a0ea7ff5947c5f5430a29fdd98391eb2a',1,'regexp.cpp']]],
   ['pn',['PN',['../parse_8cpp.html#a984064e7795cca571ec0d97edde6b288',1,'parse.cpp']]],
   ['pnull',['PNULL',['../matrix_8h.html#a2dfd77dcb0a119b62371c2aa3cc0c56d',1,'matrix.h']]],
-  ['point',['Point',['../_inter_views_2__defines_8h.html#a264185c815a47814791f68e7c6da85ad',1,'Point():&#160;_defines.h'],['../_inter_views_2__defines_8h.html#a7bff2da864fb642dcbfa06bc2ac74fa7',1,'point():&#160;_defines.h']]],
+  ['point',['point',['../_inter_views_2__defines_8h.html#a7bff2da864fb642dcbfa06bc2ac74fa7',1,'point():&#160;_defines.h'],['../_inter_views_2__defines_8h.html#a264185c815a47814791f68e7c6da85ad',1,'Point():&#160;_defines.h']]],
   ['point_5freceive',['POINT_RECEIVE',['../nrncvode_2netcvode_8cpp.html#a035a5898732479c1319c7ff35703d0e6',1,'netcvode.cpp']]],
   ['points',['points',['../_inter_views_2__defines_8h.html#a4e8e13ece85f077ad14b1b0fe16b527a',1,'_defines.h']]],
   ['polyglyph',['PolyGlyph',['../_inter_views_2__defines_8h.html#aa319eb3c8142e7590cc3cff5aca289f1',1,'_defines.h']]],

@@ -64,6 +64,7 @@ var searchData=
   ['deriv_5fused_5flist',['deriv_used_list',['../deriv_8cpp.html#aaf01fa54f4336195adac5bf335bd4989',1,'deriv.cpp']]],
   ['derivimplicit',['Derivimplicit',['../deriv_8cpp.html#a9157f181dc9e23f2418082b038359043',1,'deriv.cpp']]],
   ['derivs',['derivs',['../modlunit_2extdef_8h.html#a9daff803c769b76ad4035ba831f5e0e1',1,'derivs():&#160;extdef.h'],['../nmodl_2extdef_8h.html#a9daff803c769b76ad4035ba831f5e0e1',1,'derivs():&#160;extdef.h'],['../extdef5_8h.html#a9daff803c769b76ad4035ba831f5e0e1',1,'derivs():&#160;extdef5.h']]],
+  ['dest_5f',['dest_',['../class_s_t_e_transition.html#ac8135051eaf5b4e382bde1b13143ea96',1,'STETransition']]],
   ['destination',['destination',['../struct_concentration___pair.html#a3adb66899e610cf2350d4c9d1ccc9532',1,'Concentration_Pair::destination()'],['../struct_current___triple.html#a6c79909898ac211c159093d338c2ac2d',1,'Current_Triple::destination()']]],
   ['destructor',['destructor',['../struct_memb__func.html#aa127016ec10de1e5fc339fc916c4983c',1,'Memb_func::destructor()'],['../structc_template.html#ac4957bd92272f88c17f496373ba2c930',1,'cTemplate::destructor()']]],
   ['destructorfunc',['destructorfunc',['../group___n_m_o_d_l.html#ga06d7d6b3135897b4d2246466dff25222',1,'destructorfunc():&#160;init.cpp'],['../group___n_m_o_d_l.html#ga06d7d6b3135897b4d2246466dff25222',1,'destructorfunc():&#160;init.cpp']]],

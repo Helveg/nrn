@@ -111,6 +111,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../cmake_doc/index.html">CMake Build Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Builds</a></li>
 </ul>
 <p class="caption"><span class="caption-text">User documentation:</span></p>
 <ul>
@@ -180,6 +181,7 @@
     
 <li class="wy-breadcrumbs-aside">
     
+    
 </li>
 
       <li class="wy-breadcrumbs-aside">
@@ -238,7 +240,7 @@ installer, <code class="docutils literal notranslate"><span class="pre">py-27-36
 compatible with Python versions 2.7, 3.6, 3.7, 3.8 and 3.9. Note that if you double-click the installer
 then you might see warning like below. In this case you have to right-click on the installer and then
 click <code class="docutils literal notranslate"><span class="pre">Open</span></code>. You can then see an option to <code class="docutils literal notranslate"><span class="pre">Open</span></code> installer:</p>
-<p><img alt="Installer Warning" src="install/docs/_static/osx_installer_warning_solution.png" /></p>
+<p><img alt="Installer Warning" src="../_images/osx_installer_warning_solution.png" /></p>
 <p>This will install NEURON under directory <code class="docutils literal notranslate"><span class="pre">/Applications/NEURON-&lt;version&gt;/</span></code> directory. For GUI support you
 have to install <a class="reference external" href="https://www.xquartz.org/">XQuartz</a> separately. Once you start Terminal application, NEURON
 binaries (<code class="docutils literal notranslate"><span class="pre">nrniv</span></code>, <code class="docutils literal notranslate"><span class="pre">neurondemo</span></code> etc.) should be available to start.</p>
@@ -262,12 +264,14 @@ from source.</p>
 <p>Currently, we are supporting two build systems:</p>
 <ul class="simple">
 <li><a class="reference external" href="#build-cmake">CMake</a> (<strong>recommended</strong>)</li>
-<li><a class="reference external" href="#build-autotools">Autotools</a> (legacy, minimum support)</li>
+<li><a class="reference external" href="#build-autotools">Autotools</a> (legacy, minimum support - <strong>will be DROPPED in the next release</strong>)</li>
 </ul>
-<p>Starting with the 8.0 release, we recommend users to use CMake as the primary build system for NEURON.
+<p>Note that starting with the 8.0 release, CMake is used as the primary build system for NEURON.
 We would be grateful for any feedback or issues you encounter using the CMake-based build system.
-Please <a class="reference external" href="https://github.com/neuronsimulator/nrn/issues">report any issue here</a> and we will be happy to help. In addition to the instructions below, you can find up to date build scripts for different platforms in <a class="reference external" href="https://github.com/neuronsimulator/nrn-build-ci#scheduled-ci-builds-for-neuron">nrn-build-ci</a> repository.</p>
-<p><strong>If you are using autotools, we highly recommend switching to CMake.</strong></p>
+Please <a class="reference external" href="https://github.com/neuronsimulator/nrn/issues">report any issue here</a> and we will be
+happy to help.
+In addition to the instructions below, you can find up to date build scripts for different platforms in <a class="reference external" href="https://github.com/neuronsimulator/nrn-build-ci#scheduled-ci-builds-for-neuron">nrn-build-ci</a> repository.</p>
+<p><strong>If you are using autotools, we strongly recommend switching to CMake as of now.</strong></p>
 <div class="section" id="install-build-dependencies">
 <h2>Install Build Dependencies<a class="headerlink" href="#install-build-dependencies" title="Permalink to this headline">¶</a></h2>
 <p>In order to build NEURON from source, the following packages must be available:</p>
@@ -285,6 +289,7 @@ Please <a class="reference external" href="https://github.com/neuronsimulator/nr
 <li>X11 (Linux) or XQuartz (MacOS) (for GUI)</li>
 </ul>
 <p>Depending on platform you can install these dependencies as follows:</p>
+<p><a name="Mac-OS-Depend"></a></p>
 <div class="section" id="id1">
 <h3>Mac OS<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>This is for x86_64. For Apple M1 (arm64), see <a class="reference external" href="#Apple-M1-Build-Dependencies">here</a></p>
@@ -344,8 +349,9 @@ install dependencies. For example, on Ubuntu:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get update
 sudo apt-get install -y bison cmake flex git <span class="se">\</span>
      libncurses-dev libopenmpi-dev libx11-dev <span class="se">\</span>
-     libxcomposite-dev openmpi-bin python3-numpy <span class="se">\</span>
-     python3-dev python3-scipy cython3
+     libxcomposite-dev openmpi-bin python3-dev
+<span class="c1"># for python dependencies</span>
+pip install scipy numpy cython
 <span class="c1"># for autotools based installation only</span>
 sudo apt-get install -y automake libtool make
 </pre></div>

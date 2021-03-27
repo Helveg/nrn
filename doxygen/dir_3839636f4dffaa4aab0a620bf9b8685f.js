@@ -86,7 +86,11 @@ var dir_3839636f4dffaa4aab0a620bf9b8685f =
     [ "nrnrtime.cpp", "nrnrtime_8cpp.html", null ],
     [ "nrnsection_mapping.h", "nrnsection__mapping_8h.html", "nrnsection__mapping_8h" ],
     [ "nrnste.cpp", "nrnste_8cpp.html", "nrnste_8cpp" ],
-    [ "nrnste.h", "nrnste_8h.html", "nrnste_8h" ],
+    [ "nrnste.h", "nrnste_8h.html", [
+      [ "STETransition", "class_s_t_e_transition.html", "class_s_t_e_transition" ],
+      [ "STEState", "class_s_t_e_state.html", "class_s_t_e_state" ],
+      [ "StateTransitionEvent", "class_state_transition_event.html", "class_state_transition_event" ]
+    ] ],
     [ "nvector_nrnparallel_ld.cpp", "nvector__nrnparallel__ld_8cpp.html", "nvector__nrnparallel__ld_8cpp" ],
     [ "nvector_nrnparallel_ld.h", "nvector__nrnparallel__ld_8h.html", "nvector__nrnparallel__ld_8h" ],
     [ "nvector_nrnserial_ld.cpp", "nvector__nrnserial__ld_8cpp.html", "nvector__nrnserial__ld_8cpp" ],

@@ -39,7 +39,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Calcium Waves" href="Calcium%20Waves.html" />
+    <link rel="next" title="Changing initial conditions and parameters" href="Changing%20initial%20conditions%20and%20parameters.html" />
     <link rel="prev" title="scripting-neuron-basics" href="../tutorials/scripting-neuron-basics.html" /> 
 </head>
 
@@ -89,6 +89,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install/install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cmake_doc/index.html">CMake Build Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/developer.html">Developer Builds</a></li>
 </ul>
 <p class="caption"><span class="caption-text">User documentation:</span></p>
 <ul class="current">
@@ -96,14 +97,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../hoc/index.html">NEURON HOC documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Python tutorials</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Python RXD tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Calcium%20Waves.html">Calcium Waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Changing%20initial%20conditions%20and%20parameters.html">Changing initial conditions and parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Reaction-Diffusion%20tutorial.html">Reaction-Diffusion tutorial</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changing%20intial%20conditions.html">changing intial conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Restricting%20reactions%20to%20certain%20sections.html">Restricting reactions to certain sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-initialization.html">basic-initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="calcium%20waves.html">calcium waves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="circadian.html">circadian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="combining%20currents%20from%20mod%20files%20with%20rxd.html">combining currents from mod files with rxd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="degradable_buffer.html">degradable_buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="extracellular.html">extracellular</a></li>
-<li class="toctree-l2"><a class="reference internal" href="initialization.html">initialization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ion-channels.html">ion-channels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ip3-demo.html">ip3-demo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="thresholds.html">thresholds</a></li>
 </ul>
@@ -168,6 +170,7 @@
     
 <li class="wy-breadcrumbs-aside">
     
+    
 </li>
 
       <li class="wy-breadcrumbs-aside">
@@ -191,14 +194,15 @@
 <h1>Python RXD tutorials<a class="headerlink" href="#python-rxd-tutorials" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Calcium%20Waves.html">Calcium Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Changing%20initial%20conditions%20and%20parameters.html">Changing initial conditions and parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reaction-Diffusion%20tutorial.html">Reaction-Diffusion tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="changing%20intial%20conditions.html">changing intial conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Restricting%20reactions%20to%20certain%20sections.html">Restricting reactions to certain sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic-initialization.html">basic-initialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calcium%20waves.html">calcium waves</a></li>
 <li class="toctree-l1"><a class="reference internal" href="circadian.html">circadian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="combining%20currents%20from%20mod%20files%20with%20rxd.html">combining currents from mod files with rxd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="degradable_buffer.html">degradable_buffer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extracellular.html">extracellular</a></li>
-<li class="toctree-l1"><a class="reference internal" href="initialization.html">initialization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ion-channels.html">ion-channels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ip3-demo.html">ip3-demo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thresholds.html">thresholds</a></li>
 </ul>
@@ -211,7 +215,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Calcium%20Waves.html" class="btn btn-neutral float-right" title="Calcium Waves" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Changing%20initial%20conditions%20and%20parameters.html" class="btn btn-neutral float-right" title="Changing initial conditions and parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="../tutorials/scripting-neuron-basics.html" class="btn btn-neutral float-left" title="scripting-neuron-basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

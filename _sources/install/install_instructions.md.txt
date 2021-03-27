@@ -43,7 +43,7 @@ compatible with Python versions 2.7, 3.6, 3.7, 3.8 and 3.9. Note that if you dou
 then you might see warning like below. In this case you have to right-click on the installer and then
 click `Open`. You can then see an option to `Open` installer: 
 
-![Installer Warning](docs/_static/osx_installer_warning_solution.png "Mac OS Warning")
+![Installer Warning](../_static/osx_installer_warning_solution.png "Mac OS Warning")
 
 This will install NEURON under directory `/Applications/NEURON-<version>/` directory. For GUI support you
 have to install [XQuartz](https://www.xquartz.org/) separately. Once you start Terminal application, NEURON
@@ -70,13 +70,15 @@ from source.
 Currently, we are supporting two build systems:
 
 - [CMake](#build-cmake) (__recommended__)
-- [Autotools](#build-autotools) (legacy, minimum support)
+- [Autotools](#build-autotools) (legacy, minimum support - __will be DROPPED in the next release__)
 
-Starting with the 8.0 release, we recommend users to use CMake as the primary build system for NEURON.
+Note that starting with the 8.0 release, CMake is used as the primary build system for NEURON.
 We would be grateful for any feedback or issues you encounter using the CMake-based build system.
-Please [report any issue here](https://github.com/neuronsimulator/nrn/issues) and we will be happy to help. In addition to the instructions below, you can find up to date build scripts for different platforms in [nrn-build-ci](https://github.com/neuronsimulator/nrn-build-ci#scheduled-ci-builds-for-neuron) repository.
+Please [report any issue here](https://github.com/neuronsimulator/nrn/issues) and we will be
+happy to help.
+In addition to the instructions below, you can find up to date build scripts for different platforms in [nrn-build-ci](https://github.com/neuronsimulator/nrn-build-ci#scheduled-ci-builds-for-neuron) repository.
 
-**If you are using autotools, we highly recommend switching to CMake.**
+**If you are using autotools, we strongly recommend switching to CMake as of now.**
 
 ### Install Build Dependencies
 
@@ -96,6 +98,7 @@ The following packages are optional (see build options):
 
 Depending on platform you can install these dependencies as follows:
 
+<a name="Mac-OS-Depend"></a>
 #### Mac OS
 
 This is for x86_64. For Apple M1 (arm64), see [here](#Apple-M1-Build-Dependencies)
@@ -163,8 +166,9 @@ install dependencies. For example, on Ubuntu:
 sudo apt-get update
 sudo apt-get install -y bison cmake flex git \
      libncurses-dev libopenmpi-dev libx11-dev \
-     libxcomposite-dev openmpi-bin python3-numpy \
-     python3-dev python3-scipy cython3
+     libxcomposite-dev openmpi-bin python3-dev
+# for python dependencies
+pip install scipy numpy cython
 # for autotools based installation only
 sudo apt-get install -y automake libtool make
 ```
