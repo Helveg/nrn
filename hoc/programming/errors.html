@@ -212,7 +212,8 @@
 <dd><dl class="docutils">
 <dt>Syntax:</dt><dd><code class="docutils literal notranslate"><span class="pre">coredump_on_error(1</span> <span class="pre">or</span> <span class="pre">0)</span></code></dd>
 <dt>Description:</dt><dd>On unix machines, sets a flag which requests (1) a coredump in case
-of memory or bus errors.</dd>
+of memory or bus errors — Or floating exceptions if
+<code class="xref py py-func docutils literal notranslate"><span class="pre">nrn_fenableexcept()</span></code> has been turned on.</dd>
 </dl>
 </dd></dl>
 
@@ -221,12 +222,19 @@ of memory or bus errors.</dd>
 <dt id="nrn_feenableexcept">
 <code class="descname"><span class="pre">nrn_feenableexcept</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nrn_feenableexcept" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
-<dt>Syntax:</dt><dd><code class="docutils literal notranslate"><span class="pre">nrn_feenableexcept(boolean)</span></code></dd>
-<dt>Description:</dt><dd>Sets or turns off a flag which, if on, causes a SIGFPE when a floating error occurs which consist of
+<dt>Syntax:</dt><dd><code class="docutils literal notranslate"><span class="pre">previous_floating_point_mask</span> <span class="pre">=</span> <span class="pre">nrn_feenableexcept(boolean)</span></code></dd>
+<dt>Description:</dt><dd><p>Sets or turns off a flag which, if on, causes a SIGFPE when a floating error occurs which consist of
 divide by zero, overflow, or invalid result. Known to work on linux. Turning on the flag is very helpful
 in finding the code location at which a variable is assigned a value of NaN or Inf. For a serial model, this
 is most easily done when running under gdb. For a parallel model, one can combine with coredump_on_error
-and, to force a coredump on abort(), use the bash command ‘ulimit -c unlimited’.</dd>
+and, to force a coredump on abort(), use the bash command ‘ulimit -c unlimited’.</p>
+<p>Return is the previous value of the floating-point mask. (or -1
+on failure to set the floating-point flags; or -2 if feenableexcept
+does not exist).</p>
+<p>Without an arg, SIGFPE is turned on.</p>
+</dd>
+<dt>Note:</dt><dd>The normal trap for exp(x) for x &gt; 700 in mod files becomes
+a floating exception when x is out of range.</dd>
 </dl>
 </dd></dl>
 

@@ -128,6 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#occasionally-useful-advanced-options">Occasionally useful advanced options:</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#cmake-c-compiler-filepath-usr-bin-cc">CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cmake-cxx-compiler-filepath-usr-bin-c">CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-nmodl-cxx-flags-string">NRN_NMODL_CXX_FLAGS:STRING=””</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#readline-root-dir-path-usr">Readline_ROOT_DIR:PATH=/usr</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#nrn-enable-tests-bool-off">NRN_ENABLE_TESTS:BOOL=OFF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#nrn-enable-coverage-bool-off">NRN_ENABLE_COVERAGE:BOOL=OFF</a></li>
@@ -145,6 +146,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#nrn-use-rel-rpath-off">NRN_USE_REL_RPATH=OFF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#nrn-enable-binary-special-bool-off">NRN_ENABLE_BINARY_SPECIAL:BOOL=OFF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#nrn-enable-internal-readline-bool-off">NRN_ENABLE_INTERNAL_READLINE:BOOL=OFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-backtrace-bool-off">NRN_ENABLE_BACKTRACE:BOOL=OFF</a></li>
 </ul>
 </li>
 </ul>
@@ -550,6 +552,22 @@ python was compiling inithoc.cpp</p>
 <blockquote>
 <div>C plus plus compiler</div></blockquote>
 </div>
+<div class="section" id="nrn-nmodl-cxx-flags-string">
+<h2>NRN_NMODL_CXX_FLAGS:STRING=””<a class="headerlink" href="#nrn-nmodl-cxx-flags-string" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Compiler flag to build tools like nocmodl, modlunit.</p>
+<p>In cluster environment with different architecture of login node
+and compute node, we need to compile tools like nocmodl and modlunit
+with different compiler options to run them on login/build nodes. This
+option appends provided flags to CMAKE_CXX_FLAGS.</p>
+<p>For example, with intel compiler compiling NEURON for KNL but building
+on a Skylake node:
+.. code-block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">DCMAKE_BUILD_TYPE</span><span class="o">=</span><span class="n">Custom</span> <span class="o">-</span><span class="n">DCMAKE_CXX_FLAGS</span><span class="o">=</span><span class="s2">&quot;-xMIC-AVX512&quot;</span> <span class="o">-</span><span class="n">DNRN_NMODL_CXX_FLAGS</span><span class="o">=</span><span class="s2">&quot;-XHost&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
 <div class="section" id="readline-root-dir-path-usr">
 <h2>Readline_ROOT_DIR:PATH=/usr<a class="headerlink" href="#readline-root-dir-path-usr" title="Permalink to this headline">¶</a></h2>
 <blockquote>
@@ -678,6 +696,8 @@ necessary to launch</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nrniv -python
 </pre></div>
 </div>
+<p>Note that the top-level <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file includes some custom configuration for Cray platforms.
+This may need to be adapted if you specify <code class="docutils literal notranslate"><span class="pre">NRN_ENABLE_SHARED=OFF</span></code>.</p>
 </div></blockquote>
 </div>
 <div class="section" id="nrn-enable-threads-bool-on">
@@ -708,6 +728,15 @@ folder will be automatically loaded.</p>
 <blockquote>
 <div>Use internal Readline library shipped with NEURON</div></blockquote>
 <p>Forces use of the readline code distributed with NEURON even if there is a system supplied readline.</p>
+</div>
+<div class="section" id="nrn-enable-backtrace-bool-off">
+<h2>NRN_ENABLE_BACKTRACE:BOOL=OFF<a class="headerlink" href="#nrn-enable-backtrace-bool-off" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Generate a backtrace on floating, segfault, and bus exceptions.</p>
+<p>Avoids the need to use gdb to view the backtrace.</p>
+<p>Does not work with python.</p>
+<p>Note: floating exceptions are turned on with <a class="reference internal" href="../python/programming/errors.html#nrn_feenableexcept" title="nrn_feenableexcept"><code class="xref py py-func docutils literal notranslate"><span class="pre">nrn_feenableexcept()</span></code></a>.</p>
+</div></blockquote>
 </div>
 </div>
 

@@ -344,7 +344,7 @@ with <a class="reference internal" href="#finitialize" title="finitialize"><code
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">neuron</span> <span class="kn">import</span> <span class="n">h</span>
 
-<span class="n">soma</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">()</span>
+<span class="n">soma</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;soma&quot;</span><span class="p">)</span>
 <span class="n">soma</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;hh&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;default el_hh = </span><span class="si">%g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">soma</span><span class="o">.</span><span class="n">el_hh</span><span class="p">)</span>
 
@@ -562,8 +562,8 @@ of the proc <a class="reference internal" href="runctrl.html#runcontrol-init"><s
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># specify an example model</span>
 <span class="kn">from</span> <span class="nn">neuron</span> <span class="kn">import</span> <span class="n">h</span><span class="p">,</span> <span class="n">gui</span>
 
-<span class="n">a</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">()</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">()</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">sec</span> <span class="ow">in</span> <span class="n">h</span><span class="o">.</span><span class="n">allsec</span><span class="p">():</span>
     <span class="n">sec</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;hh&#39;</span><span class="p">)</span>

@@ -204,7 +204,7 @@ all the trigger variables specified by the transitions)</p>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">neuron</span> <span class="kn">import</span> <span class="n">h</span>
 <span class="n">h</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;stdrun.hoc&quot;</span><span class="p">)</span> <span class="c1"># use h.run(), h.cvode, etc</span>
 
-<span class="n">soma</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">()</span> <span class="c1"># empty model not allowed.</span>
+<span class="n">soma</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;soma&quot;</span><span class="p">)</span> <span class="c1"># empty model not allowed.</span>
 <span class="n">ste</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">StateTransitionEvent</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">tnext</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>

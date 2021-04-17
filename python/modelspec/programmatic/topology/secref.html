@@ -237,12 +237,12 @@ omitted, the reference is to the currently accessed section.</p>
 <dt>Description:</dt><dd><p>Returns the <a class="reference internal" href="../topology.html#Section" title="Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a> the <code class="docutils literal notranslate"><span class="pre">SectionRef</span></code> references.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">neuron</span> <span class="kn">import</span> <span class="n">h</span>
 
-<span class="n">s</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">()</span>
-<span class="n">s2</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;s2&quot;</span><span class="p">)</span>
 <span class="n">sref</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">SectionRef</span><span class="p">(</span><span class="n">sec</span><span class="o">=</span><span class="n">s2</span><span class="p">)</span>
 
-<span class="nb">print</span> <span class="p">(</span><span class="n">sref</span><span class="o">.</span><span class="n">sec</span><span class="o">==</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># False</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">sref</span><span class="o">.</span><span class="n">sec</span><span class="o">==</span><span class="n">s2</span><span class="p">)</span> <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sref</span><span class="o">.</span><span class="n">sec</span><span class="o">==</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sref</span><span class="o">.</span><span class="n">sec</span><span class="o">==</span><span class="n">s2</span><span class="p">)</span> <span class="c1"># True</span>
 </pre></div>
 </div>
 </dd>
@@ -293,7 +293,7 @@ parent’s <a class="reference internal" href="../topology.html#parent_connectio
 <dt>Description:</dt><dd><p>Returns the ith child of <code class="docutils literal notranslate"><span class="pre">sref.sec</span></code>.
 Generally it is used in a context like</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">sref</span><span class="o">.</span><span class="n">child</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">hname</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Note that the children are the current children of sref.sec, not necessarily
@@ -321,10 +321,14 @@ deleted or re-connected subsequent to the instantiation of the SectionRef.</p>
 <code class="descclassname"><span class="pre">SectionRef.</span></code><code class="descname"><span class="pre">has_parent</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SectionRef.has_parent" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Syntax:</dt><dd><code class="docutils literal notranslate"><span class="pre">boolean</span> <span class="pre">=</span> <span class="pre">sref.has_parent()</span></code></dd>
-<dt>Description:</dt><dd>Returns 1.0 if sref.sec has a parent and 0.0 if sref.sec is a root section.
+<dt>Description:</dt><dd>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if sref.sec has a parent and <code class="docutils literal notranslate"><span class="pre">False</span></code> if sref.sec is a root section.
 Invoking sref.parent when sref.sec is a root section will print an
 error message and halt execution.</dd>
 </dl>
+<p>Note:</p>
+<blockquote>
+<div>If <code class="docutils literal notranslate"><span class="pre">sec</span></code> is a Section, then <code class="docutils literal notranslate"><span class="pre">sec.parentseg()</span></code> is either the segment the section is
+attached to or <code class="docutils literal notranslate"><span class="pre">None</span></code> if <code class="docutils literal notranslate"><span class="pre">sec</span></code> does not have a parent.</div></blockquote>
 </dd></dl>
 
 <hr class="docutils" />
@@ -333,7 +337,7 @@ error message and halt execution.</dd>
 <code class="descclassname"><span class="pre">SectionRef.</span></code><code class="descname"><span class="pre">has_trueparent</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SectionRef.has_trueparent" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Syntax:</dt><dd><code class="docutils literal notranslate"><span class="pre">boolean</span> <span class="pre">=</span> <span class="pre">sref.has_trueparent()</span></code></dd>
-<dt>Description:</dt><dd>returns 1.0 if the sref.sec parent node is not the root node and 0.0 otherwise.
+<dt>Description:</dt><dd>returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the sref.sec parent node is not the root node and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.
 Invoking sref.trueparent when it is the root node will print an
 error message and halt execution.</dd>
 </dl>

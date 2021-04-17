@@ -266,7 +266,7 @@ generate an error message.</p>
 and SUFFIX mechanisms.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">neuron</span> <span class="kn">import</span> <span class="n">h</span><span class="p">,</span> <span class="n">gui</span>
 
-<span class="n">soma</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">()</span>
+<span class="n">soma</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;soma&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">pname</span><span class="p">(</span><span class="n">msname</span><span class="p">):</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>

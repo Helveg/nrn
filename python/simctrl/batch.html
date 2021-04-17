@@ -245,7 +245,7 @@ channels, applies a current clamp, runs, and stores a voltage trace.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">neuron</span> <span class="kn">import</span> <span class="n">h</span>
 
 <span class="c1"># define a geometry</span>
-<span class="n">soma</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">()</span>
+<span class="n">soma</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;soma&quot;</span><span class="p">)</span>
 <span class="n">soma</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">soma</span><span class="o">.</span><span class="n">diam</span> <span class="o">=</span> <span class="mi">10</span>
 
@@ -253,7 +253,7 @@ channels, applies a current clamp, runs, and stores a voltage trace.</p>
 <span class="n">soma</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;hh&#39;</span><span class="p">)</span>
 
 <span class="c1"># add a stimulus</span>
-<span class="n">iclamp</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">IClamp</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">sec</span><span class="o">=</span><span class="n">soma</span><span class="p">)</span>
+<span class="n">iclamp</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">IClamp</span><span class="p">(</span><span class="n">soma</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
 <span class="n">iclamp</span><span class="o">.</span><span class="n">dur</span> <span class="o">=</span> <span class="mf">0.2</span>
 <span class="n">iclamp</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="mf">0.3</span>
 <span class="n">iclamp</span><span class="o">.</span><span class="n">amp</span> <span class="o">=</span> <span class="mf">0.5</span>
@@ -263,7 +263,7 @@ channels, applies a current clamp, runs, and stores a voltage trace.</p>
 <span class="n">h</span><span class="o">.</span><span class="n">batch_save</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">_ref_t</span><span class="p">,</span> <span class="n">soma</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">_ref_v</span><span class="p">)</span>
 
 <span class="c1"># initialize, run, and save</span>
-<span class="n">h</span><span class="o">.</span><span class="n">finitialize</span><span class="p">()</span>
+<span class="n">h</span><span class="o">.</span><span class="n">finitialize</span><span class="p">(</span><span class="o">-</span><span class="mi">65</span><span class="p">)</span>
 <span class="n">h</span><span class="o">.</span><span class="n">batch_run</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;hhsim.dat&#39;</span><span class="p">,</span> <span class="s1">&#39;My HH sim&#39;</span><span class="p">)</span>
 </pre></div>
 </div>

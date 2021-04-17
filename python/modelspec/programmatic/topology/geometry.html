@@ -354,7 +354,7 @@ the “0” end to the parent.</p>
 <span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">s</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">sec</span><span class="o">=</span><span class="n">a</span><span class="p">)</span> <span class="c1"># color section &quot;a&quot; red</span>
 <span class="n">h</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span>
-<span class="n">h</span><span class="o">.</span><span class="n">finitialize</span><span class="p">()</span>
+<span class="n">h</span><span class="o">.</span><span class="n">finitialize</span><span class="p">(</span><span class="o">-</span><span class="mi">65</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">sec</span> <span class="ow">in</span> <span class="n">h</span><span class="o">.</span><span class="n">allsec</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">sec</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sec</span><span class="o">.</span><span class="n">n3d</span><span class="p">()):</span>
@@ -632,7 +632,7 @@ the number of 3d points.  Thus if there are a lot of 3d points the
 shape will appear as a string of uniform diameter cylinders each of
 length L/nseg. ie. after transfer <code class="docutils literal notranslate"><span class="pre">sec.diam3d(i)</span> <span class="pre">==</span> <span class="pre">sec(sec.arc3d(i)/sec.L).diam</span></code>.
 Then, after a call to an internal function such as <code class="docutils literal notranslate"><span class="pre">area()</span></code> or
-<code class="docutils literal notranslate"><span class="pre">h.finitialize()</span></code>, the 3d point info will be used to determine the values
+<code class="docutils literal notranslate"><span class="pre">h.finitialize(-65)</span></code>, the 3d point info will be used to determine the values
 of the segment diameters.</p>
 <p>Because of the three separate interpolations:
 hoc range spec -&gt; segment diameter -&gt; 3d point diam -&gt; segment diameter,

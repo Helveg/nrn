@@ -102,6 +102,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#install-neuron-using-cmake">Install NEURON using CMake</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#optimized-cpu-and-gpu-support-using-coreneuron">Optimized CPU and GPU Support using CoreNEURON</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-integrated-tests">Run integrated tests</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#install-neuron-using-autotools">Install NEURON using Autotools</a></li>
@@ -383,12 +384,6 @@ build system, and they can be installed together as shown below:</p>
 </pre></div>
 </div>
 <ol class="simple">
-<li>If you are building on Cray systems with a GNU toolchain, you have to set the following environmental variable:</li>
-</ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">CRAYPE_LINK_TYPE</span><span class="o">=</span><span class="n">dynamic</span>
-</pre></div>
-</div>
-<ol class="simple">
 <li>Run <code class="docutils literal notranslate"><span class="pre">cmake</span></code> with the appropriate options (see below for a list of common options). A full list of options
 can be found in <code class="docutils literal notranslate"><span class="pre">nrn/CMakeLists.txt</span></code> and defaults are shown in <code class="docutils literal notranslate"><span class="pre">nrn/cmake/BuildOptionDefaults.cmake</span></code>. e.g. a bare-bones installation:</li>
 </ol>
@@ -402,10 +397,10 @@ can be found in <code class="docutils literal notranslate"><span class="pre">nrn
 <ol class="simple">
 <li>Build the code:</li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">j</span>
-<span class="n">make</span> <span class="n">install</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">parallel</span> <span class="mi">8</span> <span class="o">--</span><span class="n">target</span> <span class="n">install</span>
 </pre></div>
 </div>
+<p>Feel free to set the number of parallel jobs according to your system using the <code class="docutils literal notranslate"><span class="pre">--parallel</span></code> option.</p>
 <ol class="simple">
 <li>Set PATH and PYTHONPATH environmental variables to use the installation:</li>
 </ol>
@@ -435,6 +430,32 @@ performance on modern CPU and GPU architectures. CoreNEURON is designed as a lib
 and can transparently handle all spiking network simulations including gap junction coupling with the fixed time
 step method. You can find detailed instructions <a class="reference external" href="docs/coreneuron/how-to/coreneuron">here</a> and
 <a class="reference external" href="https://github.com/BlueBrain/CoreNeuron/#installation">here</a>.</p>
+</div>
+<div class="section" id="run-integrated-tests">
+<h3>Run integrated tests<a class="headerlink" href="#run-integrated-tests" title="Permalink to this headline">¶</a></h3>
+<p><strong>NEURON</strong> includes also some unit and integration tests. To enable you need to set the <code class="docutils literal notranslate"><span class="pre">CMake</span></code> flag <strong>-DNRN_ENABLE_TESTS=ON</strong>.
+The tests lie in the <code class="docutils literal notranslate"><span class="pre">test</span></code> directory and cover various aspects of <strong>NEURON</strong>:</p>
+<ul class="simple">
+<li><strong>CoreNEURON</strong> integration (if enabled in build step)</li>
+<li>Functionality and result regression test for <a class="reference external" href="https://github.com/neuronsimulator/ringtest">ringtest</a> and <a class="reference external" href="https://github.com/neuronsimulator/testcorenrn">testcorenrn</a></li>
+<li>HOC interpreter tests</li>
+<li>Python interpreter tests</li>
+<li>Parallel Context tests</li>
+<li>Rx3d tests</li>
+<li>Unit tests</li>
+<li>GapJunction tests</li>
+</ul>
+<p>To run the tests it’s needed to:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> nrn/build
+cmake .. <span class="se">\</span>
+ -DNRN_ENABLE_INTERVIEWS<span class="o">=</span>OFF <span class="se">\</span>
+ -DNRN_ENABLE_MPI<span class="o">=</span>OFF <span class="se">\</span>
+ -DNRN_ENABLE_RX3D<span class="o">=</span>OFF <span class="se">\</span>
+ -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/path/to/install/directory
+cmake --build . --parallel <span class="m">8</span>
+ctest <span class="c1"># use --parallel for speed, -R to run specific tests</span>
+</pre></div>
+</div>
 <p><a name="build-autotools"></a></p>
 </div>
 </div>
@@ -531,6 +552,25 @@ directory is created the program “special”, which is the neuron binary that 
 <span class="nb">export</span> <span class="nv">DYLD_LIBRARY_PATH</span><span class="o">=</span>/install/path/lib:<span class="nv">$DYLD_LIBRARY_PATH</span>. <span class="c1"># on Mac OS</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><strong>How to build NEURON in cluster environment where build node architecture is different than compute node?</strong></li>
+</ul>
+<p>In cluster environment, sometime we have different architecture of login/build nodes than compute nodes (similar to
+cross-compile environment). NEURON has tools like <code class="docutils literal notranslate"><span class="pre">nocmodl</span></code>, <code class="docutils literal notranslate"><span class="pre">modlunit</span></code> which are executed on login/build
+nodes. If these tools are compiled with compute node architecture then we might see error like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span> <span class="m">10</span>%<span class="o">]</span> Generating ../../../src/nrnoc/syn.c
+Please verify that both the operating system and the processor support Intel<span class="o">(</span>R<span class="o">)</span> AVX512ER and AVX512PF instructions.
+</pre></div>
+</div>
+<p>or even <code class="docutils literal notranslate"><span class="pre">segmentation</span> <span class="pre">fault</span></code> when MOD files are translated to C files.</p>
+<p>To avoid this, we have to build nocmodl, modlunit with login/build node architecture. NEURON by default set <code class="docutils literal notranslate"><span class="pre">-O0</span></code> compile flag for these tools to avoid compiler generating architecture specific instructions. But if this is not sufficient, you can set <code class="docutils literal notranslate"><span class="pre">NRN_NMODL_CXX_FLAGS</span></code> CMake option specifying which compiler flags should be used. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake .. <span class="o">[</span>other options<span class="o">]</span> <span class="se">\</span>
+    -DCMAKE_CXX_FLAGS<span class="o">=</span><span class="s2">&quot;-O3 -xMIC-AVX512&quot;</span> <span class="se">\</span>
+    -DCMAKE_BUILD_TYPE<span class="o">=</span>Custom <span class="se">\</span>
+    -DNRN_NMODL_CXX_FLAGS<span class="o">=</span><span class="s2">&quot;-xHost&quot;</span>
+</pre></div>
+</div>
+<p>In the above example, we used custom build type with Intel compiler’s <code class="docutils literal notranslate"><span class="pre">-xMIC-AVX512</span></code> flag for KNL architecture but used <code class="docutils literal notranslate"><span class="pre">-xHost</span></code> flag so that <code class="docutils literal notranslate"><span class="pre">nocmodl</span></code> and <code class="docutils literal notranslate"><span class="pre">modlunit</span></code> are compiled compatible with host architecture (i.e. node where NEURON is being built).</p>
 </div>
 </div>
 

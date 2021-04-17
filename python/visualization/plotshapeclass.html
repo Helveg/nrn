@@ -590,8 +590,9 @@ color between fastflush calls.</p>
 <p>Example:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span>            <span class="kn">from</span> <span class="nn">neuron</span> <span class="kn">import</span> <span class="n">h</span><span class="p">,</span> <span class="n">gui</span>
+            <span class="kn">import</span> <span class="nn">time</span>
 
-            <span class="n">soma</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">()</span>
+            <span class="n">soma</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;soma&quot;</span><span class="p">)</span>
 
             <span class="n">sl</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">SectionList</span><span class="p">()</span>
 
@@ -625,9 +626,9 @@ color between fastflush calls.</p>
                             <span class="n">s</span><span class="o">.</span><span class="n">fastflush</span><span class="p">()</span> <span class="c1"># faster by up to a factor of 4</span>
                             <span class="n">h</span><span class="o">.</span><span class="n">doNotify</span><span class="p">()</span>
 
-            <span class="n">h</span><span class="o">.</span><span class="n">startsw</span><span class="p">()</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
             <span class="n">p</span><span class="p">()</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">stopsw</span><span class="p">())</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>

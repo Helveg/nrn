@@ -650,11 +650,9 @@ The “anonymous” python section can be given a name with the named
 parameter and/or associated with a cell object using the named cell parameter.
 Note that a cell association is required if one anticipates using the
 <a class="reference internal" href="../modelspec/programmatic/network/parcon.html#ParallelContext.gid2cell" title="ParallelContext.gid2cell"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gid2cell()</span></code></a> method of <a class="reference internal" href="../modelspec/programmatic/network/parcon.html#ParallelContext" title="ParallelContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParallelContext</span></code></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">neuron</span>
-<span class="n">h</span> <span class="o">=</span> <span class="n">neuron</span><span class="o">.</span><span class="n">h</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">neuron</span> <span class="kn">import</span> <span class="n">h</span>
 <span class="n">sec</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Section</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sec</span><span class="p">)</span>         <span class="c1"># prints &lt;nrn.Section object at 0x2a96982108&gt;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sec</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>  <span class="c1"># prints PySec_2a96982108</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sec</span><span class="p">)</span>         <span class="c1"># prints __nrnsec_0x7fa44eb70000</span>
 <span class="n">sec</span><span class="o">.</span><span class="n">nseg</span> <span class="o">=</span> <span class="mi">3</span>       <span class="c1"># section has 3 segments (compartments)</span>
 <span class="n">sec</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;hh&quot;</span><span class="p">)</span>   <span class="c1"># all compartments have the hh mechanism</span>
 <span class="n">sec</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="mi">20</span>         <span class="c1"># Length of the entire section is 20 um.</span>
