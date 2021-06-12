@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
 
   
@@ -30,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -117,6 +120,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../doxygen.html">C/C++ API</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Changelog</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">8.0.0</a></li>
+</ul>
 
             
           
@@ -199,8 +206,8 @@
 <li><a class="reference external" href="#source-code"><strong>Source Code</strong></a></li>
 <li><a class="reference external" href="#hoc-grammar"><strong>HOC Grammar</strong></a></li>
 <li><a class="reference external" href="#hoc-initialization"><strong>HOC Initialization</strong></a></li>
-<li><a class="reference external" href="#hoc-interpreter---executing-the-machine"><strong><strong>HOC Interpreter - executing the machine</strong></strong></a></li>
-<li><a class="reference external" href="#hoc-interpreter-example---printf"><strong><strong>HOC Interpreter example - printf</strong></strong></a></li>
+<li><a class="reference external" href="#hoc-interpreter-executing-the-machine"><strong><strong>HOC Interpreter - executing the machine</strong></strong></a></li>
+<li><a class="reference external" href="#hoc-interpreter-example-printf"><strong><strong>HOC Interpreter example - printf</strong></strong></a></li>
 </ul>
 </li>
 </ul>
@@ -319,16 +326,16 @@
 </div>
 <p>Union <em><strong>u</strong></em> is used to hold actual value of the symbol given its type.</p>
 <p>We also have <em><strong>Inst,</strong></em> which represents the data type of a machine instruction and is tied to function pointers of different types that correspond to different functions or grammar actions:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>  <span class="k">typedef</span> <span class="nf">int</span>	<span class="p">(</span><span class="o">*</span><span class="n">Pfri</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
-  <span class="k">typedef</span> <span class="nf">void</span>	<span class="p">(</span><span class="o">*</span><span class="n">Pfrv</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
-  <span class="k">typedef</span> <span class="nf">double</span>	<span class="p">(</span><span class="o">*</span><span class="n">Pfrd</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>  <span class="k">typedef</span> <span class="kt">int</span>	<span class="p">(</span><span class="o">*</span><span class="n">Pfri</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+  <span class="k">typedef</span> <span class="kt">void</span>	<span class="p">(</span><span class="o">*</span><span class="n">Pfrv</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+  <span class="k">typedef</span> <span class="kt">double</span>	<span class="p">(</span><span class="o">*</span><span class="n">Pfrd</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
   <span class="k">typedef</span> <span class="k">struct</span> <span class="nc">Object</span><span class="o">**</span> <span class="p">(</span><span class="o">*</span><span class="n">Pfro</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
   <span class="k">typedef</span> <span class="k">const</span> <span class="kt">char</span><span class="o">**</span> <span class="p">(</span><span class="o">*</span><span class="n">Pfrs</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
 
 
-  <span class="k">typedef</span> <span class="nf">int</span>	<span class="p">(</span><span class="o">*</span><span class="n">Pfri_vp</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">);</span>
-  <span class="k">typedef</span> <span class="nf">void</span>	<span class="p">(</span><span class="o">*</span><span class="n">Pfrv_vp</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">);</span>
-  <span class="k">typedef</span> <span class="nf">double</span>	<span class="p">(</span><span class="o">*</span><span class="n">Pfrd_vp</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">);</span>
+  <span class="k">typedef</span> <span class="kt">int</span>	<span class="p">(</span><span class="o">*</span><span class="n">Pfri_vp</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">);</span>
+  <span class="k">typedef</span> <span class="kt">void</span>	<span class="p">(</span><span class="o">*</span><span class="n">Pfrv_vp</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">);</span>
+  <span class="k">typedef</span> <span class="kt">double</span>	<span class="p">(</span><span class="o">*</span><span class="n">Pfrd_vp</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">);</span>
   <span class="k">typedef</span> <span class="k">struct</span> <span class="nc">Object</span><span class="o">**</span> <span class="p">(</span><span class="o">*</span><span class="n">Pfro_vp</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">);</span>
   <span class="k">typedef</span> <span class="k">const</span> <span class="kt">char</span><span class="o">**</span> <span class="p">(</span><span class="o">*</span><span class="n">Pfrs_vp</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">);</span>
 

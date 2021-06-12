@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
 
   
@@ -30,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -127,6 +130,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../scm/index.html">NEURON SCM and Release</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/index.html">NEURON Development topics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doxygen.html">C/C++ API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Changelog</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">8.0.0</a></li>
 </ul>
 
             
@@ -229,7 +236,8 @@ if python support is required. You can find detailed step-by-step instructions i
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">neuron</span>
 </pre></div>
 </div>
-<p>With pip only Python3 wheels are provided via <a class="reference external" href="https://pypi.org/project/NEURON/">pypi.org</a>.</p>
+<p>Python wheels are provided via <a class="reference external" href="https://pypi.org/project/NEURON/">pypi.org</a>. Note that Python2
+wheels are provided for the 8.0 release only.</p>
 <p>Like Windows, you can also use a binary installer to install NEURON. You can download alpha or recent
 releases from below URLs:</p>
 <ul class="simple">
@@ -252,8 +260,8 @@ binaries (<code class="docutils literal notranslate"><span class="pre">nrniv</sp
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">neuron</span>
 </pre></div>
 </div>
-<p>Note that only Python3 wheels are provided. Note that for recent releases we are not providing .rpm or
-.deb installers.</p>
+<p>Note that Python2 wheels are provided only for the 8.0 release. Also, we are not providing .rpm or .deb
+installers for recent releases.</p>
 </div>
 </div>
 <div class="section" id="installing-source-distributions">
@@ -372,7 +380,7 @@ build system, and they can be installed together as shown below:</p>
 <li>Clone the latest version or specific release:</li>
 </ol>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">neuronsimulator</span><span class="o">/</span><span class="n">nrn</span>           <span class="c1"># latest development branch</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">neuronsimulator</span><span class="o">/</span><span class="n">nrn</span> <span class="o">-</span><span class="n">b</span> <span class="mf">7.8</span><span class="o">.</span><span class="mi">2</span>  <span class="c1"># specific release version 7.8.2</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">neuronsimulator</span><span class="o">/</span><span class="n">nrn</span> <span class="o">-</span><span class="n">b</span> <span class="mf">7.8.2</span>  <span class="c1"># specific release version 7.8.2</span>
 <span class="n">cd</span> <span class="n">nrn</span>
 </pre></div>
 </div>
@@ -553,6 +561,29 @@ directory is created the program “special”, which is the neuron binary that 
 </pre></div>
 </div>
 <ul class="simple">
+<li><strong>NEURON is not able to find correct Python or NEURON Python library. What can I do?</strong></li>
+</ul>
+<p>NEURON tries to find correct Python based on user’s environment. If you are using NEURON via python interpreter then,
+as mentioned previously, setting <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> would be sufficient. For <code class="docutils literal notranslate"><span class="pre">nrniv</span></code> or <code class="docutils literal notranslate"><span class="pre">special</span></code> binaries, you can also use
+<code class="docutils literal notranslate"><span class="pre">-pyexe</span></code> option to specify which Python should be used by NEURON:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nrniv -pyexe /python/install/path/python-3.8.3/bin/python3
+</pre></div>
+</div>
+<p>If you have enabled dynamic python support using <code class="docutils literal notranslate"><span class="pre">NRN_ENABLE_PYTHON_DYNAMIC</span></code> CMake option or installed NEURON via pip
+and see error like below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Could not load either libnrnpython3 or libnrnpython2
+</pre></div>
+</div>
+<p>then NEURON is not able to find appropriate Python and corresponding Python library. You can verify which Python is
+being used by running following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ nrnpyenv.sh
+...
+<span class="nb">export</span> <span class="nv">NRN_PYTHONHOME</span><span class="o">=</span><span class="s2">&quot;/python/install/path/python-3.8.3/&quot;</span>
+<span class="nb">export</span> <span class="nv">NRN_PYLIB</span><span class="o">=</span><span class="s2">&quot;/python/install/path/python-3.8.3/lib/libpython3.8.so.1.0&quot;</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">NRN_PYTHONHOME</span></code> and <code class="docutils literal notranslate"><span class="pre">NRN_PYLIB</span></code> are inappropriate then you can set them explicitly or use <code class="docutils literal notranslate"><span class="pre">-pyexe</span></code> option mentioned above.</p>
+<ul class="simple">
 <li><strong>How to build NEURON in cluster environment where build node architecture is different than compute node?</strong></li>
 </ul>
 <p>In cluster environment, sometime we have different architecture of login/build nodes than compute nodes (similar to
@@ -571,6 +602,32 @@ Please verify that both the operating system and the processor support Intel<spa
 </pre></div>
 </div>
 <p>In the above example, we used custom build type with Intel compiler’s <code class="docutils literal notranslate"><span class="pre">-xMIC-AVX512</span></code> flag for KNL architecture but used <code class="docutils literal notranslate"><span class="pre">-xHost</span></code> flag so that <code class="docutils literal notranslate"><span class="pre">nocmodl</span></code> and <code class="docutils literal notranslate"><span class="pre">modlunit</span></code> are compiled compatible with host architecture (i.e. node where NEURON is being built).</p>
+<ul>
+<li><p class="first"><strong>I’m getting “unrecognized command-line option” build errors on macos as python extensions are
+being built.</strong></p>
+<p>Certain combinations of Python environment and C/C++ compiler on macos may lead to build errors of
+this kind:</p>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>running build_ext
+building &#39;neuron.rxd.geometry3d.graphicsPrimitives&#39; extension
+creating build
+creating build/temp.macosx-10.15-x86_64-2.7
+/usr/local/bin/gcc-10 -fno-strict-aliasing -fno-common -dynamic -g -Os -pipe -fno-common -fno-strict-aliasing -fwrapv -DENABLE_DTRACE -DMACOSX -DNDEBUG -Wall -Wstrict-prototypes -Wshorten-64-to-32 -iwithsysroot /usr/local/libressl/include -DNDEBUG -g -fwrapv -Os -Wall -Wstrict-prototypes -DENABLE_DTRACE -arch x86_64 -pipe -I/Users/user/nrn/share/lib/python/neuron/rxd/geometry3d -I. -I/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy/core/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7 -c graphicsPrimitives.cpp -o build/temp.macosx-10.15-x86_64-2.7/graphicsPrimitives.o -O0
+gcc-10: error: /usr/local/libressl/include: No such file or directory
+gcc-10: error: unrecognized command-line option &#39;-Wshorten-64-to-32&#39;
+gcc-10: error: unrecognized command-line option &#39;-iwithsysroot&#39;; did you mean &#39;-isysroot&#39;?
+error: command &#39;/usr/local/bin/gcc-10&#39; failed with exit status 1
+</pre></div>
+</div>
+<p>The reason for this type of failure is that Python will provide build command-arguments for
+extension building based on its own build. If the compiler used to build NEURON expects different
+commands (eg. gcc vs. clang) then above error will be encountered.</p>
+<p>A workaround for this issue is to set the <code class="docutils literal notranslate"><span class="pre">CFLAGS</span></code> environment variable providing build arguments
+compatible with your compiler. Here is an example for gcc/clang:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-fno-strict-aliasing -fno-common -dynamic -g -Os -pipe -DMACOSX -DNDEBUG -Wall -Wstrict-prototypes&quot;</span>
+</pre></div>
+</div>
 </div>
 </div>
 
