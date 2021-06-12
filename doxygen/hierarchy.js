@@ -26,6 +26,7 @@ var hierarchy =
     [ "Area2Buf", "struct_area2_buf.html", null ],
     [ "Area2RT", "struct_area2_r_t.html", null ],
     [ "Arrayinfo", "struct_arrayinfo.html", null ],
+    [ "ArrayPool< T >", "class_array_pool.html", null ],
     [ "Background", null, [
       [ "AxisBackground", "class_axis_background.html", null ],
       [ "BoxBackground", "class_box_background.html", null ]
@@ -284,7 +285,6 @@ var hierarchy =
     [ "Member_ret_obj_func", "struct_member__ret__obj__func.html", null ],
     [ "Member_ret_str_func", "struct_member__ret__str__func.html", null ],
     [ "Memory", "class_memory.html", null ],
-    [ "Menuitem", "struct_menuitem.html", null ],
     [ "mesch_pair", "structmesch__pair.html", null ],
     [ "MessageItem", "class_message_item.html", null ],
     [ "MessageList", "class_message_list.html", null ],
@@ -417,6 +417,7 @@ var hierarchy =
     [ "PolyGlyph", null, [
       [ "HocMark", "class_hoc_mark.html", null ]
     ] ],
+    [ "Pool< T >", "class_pool.html", null ],
     [ "prefix", "structprefix.html", null ],
     [ "SaveState::PreSynState", "struct_save_state_1_1_pre_syn_state.html", null ],
     [ "Printer", null, [
@@ -455,8 +456,8 @@ var hierarchy =
     [ "ReactSet", "struct_react_set.html", null ],
     [ "ReadyList", "class_ready_list.html", null ],
     [ "ReducedTree", "class_reduced_tree.html", null ],
-    [ "Regexp", "class_regexp.html", null ],
     [ "regexp", "structregexp.html", null ],
+    [ "Regexp", "class_regexp.html", null ],
     [ "REGION", "struct_r_e_g_i_o_n.html", null ],
     [ "Requirement", "class_requirement.html", null ],
     [ "Requisition", "class_requisition.html", null ],
@@ -530,13 +531,14 @@ var hierarchy =
     [ "SPMAT", "struct_s_p_m_a_t.html", null ],
     [ "SPROW", "struct_s_p_r_o_w.html", null ],
     [ "spTemplate", "structsp_template.html", null ],
-    [ "SPTREE", "struct_s_p_t_r_e_e.html", null ],
+    [ "SPTREE< SPBLK >", "struct_s_p_t_r_e_e.html", null ],
+    [ "SPTREE< TQItem >", "struct_s_p_t_r_e_e.html", null ],
     [ "SPVEC", "struct_s_p_v_e_c.html", null ],
     [ "StandardPicker", "class_standard_picker.html", [
       [ "ScenePicker", "class_scene_picker.html", null ]
     ] ],
-    [ "StateStructInfo", "struct_state_struct_info.html", null ],
     [ "SaveState::StateStructInfo", "struct_save_state_1_1_state_struct_info.html", null ],
+    [ "StateStructInfo", "struct_state_struct_info.html", null ],
     [ "StateTransitionEvent", "class_state_transition_event.html", null ],
     [ "Stepper", null, [
       [ "HocValStepper", "class_hoc_val_stepper.html", null ]
