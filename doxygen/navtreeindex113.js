@@ -1,5 +1,6 @@
 var NAVTREEINDEX113 =
 {
+"string_8h_source.html":[4,0,0,2,1,11],
 "struct___n___vector_content___nrn_parallel_l_d.html":[3,0,4],
 "struct___n___vector_content___nrn_parallel_l_d.html#a006a08c66844a42310efad44246ab105":[3,0,4,2],
 "struct___n___vector_content___nrn_parallel_l_d.html#a363c4a95ed4b3787b2f38a91ef8743f4":[3,0,4,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX113 =
 "struct_i_c_s_reactions.html#a83f5936075faa7f60cbf7dcfcdf6cf5b":[3,0,172,9],
 "struct_i_c_s_reactions.html#a8c833c22ebc2aedbec55dfff46325ed6":[3,0,172,10],
 "struct_i_c_s_reactions.html#a912d4fd3bc983778b9e8ad17e3ddd1b6":[3,0,172,6],
-"struct_i_c_s_reactions.html#aaa4b8106c86ea049f1d9edc53cc709b0":[3,0,172,18],
-"struct_i_c_s_reactions.html#ab7fcc79e4ab29fa1ba547216df25fe48":[3,0,172,3]
+"struct_i_c_s_reactions.html#aaa4b8106c86ea049f1d9edc53cc709b0":[3,0,172,18]
 };

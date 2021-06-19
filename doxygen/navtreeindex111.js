@@ -1,5 +1,6 @@
 var NAVTREEINDEX111 =
 {
+"spdefs_8h.html#a4e3f04225abca15af4c8d97ca9e89e8b":[4,0,0,20,11,33],
 "spdefs_8h.html#a50168fdbaa52d4a0b1c287d476050f12":[4,0,0,20,11,10],
 "spdefs_8h.html#a5cf26ec104921eaf6890d8c1fe8c1484":[4,0,0,20,11,28],
 "spdefs_8h.html#a5e13dc645f1be1da9effa269cc372d41":[4,0,0,20,11,20],
@@ -248,6 +249,5 @@ var NAVTREEINDEX111 =
 "spt2queue_8cpp.html#a59506dc25cf97e016d9a623224e2bc27":[4,0,0,10,16,9],
 "spt2queue_8cpp.html#a6e40689fe9c7026e274b8a081c3aee0c":[4,0,0,10,16,7],
 "spt2queue_8cpp.html#a8b17789b6fc21f3a5613d324458aab60":[4,0,0,10,16,2],
-"spt2queue_8cpp.html#a9d205c6ef5889343852b6996252b8284":[4,0,0,10,16,3],
-"spt2queue_8cpp.html#af43159b222e985604f1f53f526d177b4":[4,0,0,10,16,5]
+"spt2queue_8cpp.html#a9d205c6ef5889343852b6996252b8284":[4,0,0,10,16,3]
 };
