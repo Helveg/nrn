@@ -45,7 +45,7 @@ void hoc_install_hoc_obj(void) {
     hoc_objectdata[s->u.oboff].pobj = pobj = (Object**) emalloc(sizeof(Object*));
     pobj[0] = nullptr;
 
-    auto const code = hoc_oc("objref hoc_obj_[2]\n");
+    auto const code = hoc_oc("objref hoc_obj_[2]\r\n");
     assert(code == 0);
     hoc_obj_ = hoc_lookup("hoc_obj_");
 }

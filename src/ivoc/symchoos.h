@@ -34,6 +34,7 @@
 #include <InterViews/resource.h>
 
 #include <InterViews/_enter.h>
+#include <string>
 
 class SymChooser;
 class SymChooserImpl;

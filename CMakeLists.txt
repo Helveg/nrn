@@ -337,7 +337,7 @@ endif()
 # Enable MPI
 # =============================================================================
 if(NRN_ENABLE_MPI)
-
+  message("NRN ENABLED MPI? ${NRN_ENABLE_MPI}")
   # find_package(MPI REQUIRED) has a CMAKE_OSX_ARCHITECTURES edge case
   nrn_mpi_find_package()
   set(NRNMPI 1)
